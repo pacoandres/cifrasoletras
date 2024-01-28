@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/timerCifText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="34sp" />
+
+
+        <TextView
+            android:id="@+id/resulText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
+            android:text="TextView"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/cifrasText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
+            android:text="TextView"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonUnidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/unit"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/buttonDecena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/decade"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonCifNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</RelativeLayout>

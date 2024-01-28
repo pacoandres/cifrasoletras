@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.CifrasOLetras" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:textAppearance">@style/textwhite</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="Theme.CifrasOLetras" parent="Base.Theme.CifrasOLetras" />
+</resources>

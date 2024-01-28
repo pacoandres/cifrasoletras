@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array
+        name="conso_dist_freq">
+        <item>0</item>
+        <item>11</item>
+        <item>42</item>
+        <item>76</item>
+        <item>134</item>
+        <item>203</item>
+        <item>279</item>
+        <item>370</item>
+        <item>499</item>
+        <item>722</item>
+        <item>945</item>
+        <item>1167</item>
+        <item>1395</item>
+        <item>1641</item>
+        <item>2138</item>
+        <item>2662</item>
+        <item>3297</item>
+        <item>4032</item>
+        <item>5024</item>
+        <item>6208</item>
+        <item>7421</item>
+        <item>8698</item>
+        <item>10000</item>
+    </integer-array>
+
+    <integer-array name="voc_dist_freq">
+        <item>0</item>
+        <item>3787</item>
+        <item>5743</item>
+        <item>7485</item>
+        <item>8812</item>
+        <item>10000</item>
+    </integer-array>
+
+    <string-array name="conso_dist">
+        <item></item>
+        <item>Ç</item>
+        <item>Z</item>
+        <item>W</item>
+        <item>K</item>
+        <item>J</item>
+        <item>X</item>
+        <item>Y</item>
+        <item>Q</item>
+        <item>F</item>
+        <item>H</item>
+        <item>V</item>
+        <item>B</item>
+        <item>G</item>
+        <item>P</item>
+        <item>M</item>
+        <item>C</item>
+        <item>D</item>
+        <item>L</item>
+        <item>T</item>
+        <item>R</item>
+        <item>N</item>
+        <item>S</item>
+    </string-array>
+
+    <string-array name="voc_dist">
+        <item></item>
+        <item>E</item>
+        <item>A</item>
+        <item>I</item>
+        <item>O</item>
+        <item>U</item>
+    </string-array>
+    
+</resources>

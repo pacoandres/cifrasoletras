@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Numbers or letters</string>
+    <string name="orderseq">Sequential</string>
+    <string name="orderand">Random</string>
+    <string name="timelimit">Time</string>
+    <string name="begin">Begin</string>
+    <string name="unit">Ones</string>
+    <string name="decade">Tens</string>
+    <string name="next">Next</string>
+    <string name="vocal">Vowel</string>
+    <string name="consonant">Consonant</string>
+    <string name="translated">yes</string>
+</resources>
