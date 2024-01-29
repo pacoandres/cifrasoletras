@@ -34,6 +34,7 @@ public class Letrasgame extends Gamescr {
     private int m_nletras;
     private final int m_total = 9;
     private CountDownTimer m_timer;
+    private int m_voctotalFreq = 10000, m_constotalFreq = 10000;
     public Letrasgame(Context context) {
         super(context);
         init ();
@@ -92,6 +93,8 @@ public class Letrasgame extends Gamescr {
         m_vocalf = c.getResources().getIntArray(R.array.voc_dist_freq);
         m_consonant = c.getResources().getStringArray(R.array.conso_dist);
         m_vocal = c.getResources().getStringArray(R.array.voc_dist);
+        m_voctotalFreq = m_vocalf[m_vocalf.length -1];
+        m_constotalFreq = m_consonantf[m_consonantf.length - 1];
 
     }
     private void setLetra (String letra){
@@ -124,21 +127,36 @@ public class Letrasgame extends Gamescr {
     }
 
     private String getVocal (){
-        int n = MainActivity.getRandom(10000);
+        int n = MainActivity.getRandom(m_voctotalFreq);
+        String ret = m_vocal[m_vocal.length - 1];
         for (int i = 0; i < m_vocalf.length - 1; i++){
-            if (n > m_vocalf[i] && n <= m_vocalf[i+1])
-                return m_vocal[i+1];
+            if (n > m_vocalf[i] && n <= m_vocalf[i+1]) {
+                ret = m_vocal[i + 1];
+                int res = Math.min(m_vocalf[i+1] - m_vocalf[i], 100);
+                for (int j = i+1; j < m_vocalf.length; j++)
+                    m_vocalf[j] -= res;
+                m_voctotalFreq -= res;
+                return ret;
+            }
         }
-        return m_vocal[m_vocal.length - 1];
+        return ret;
     }
 
     private String getCons (){
-        int n = MainActivity.getRandom(10000);
+        int n = MainActivity.getRandom(m_constotalFreq);
+        String ret = m_consonant[m_consonant.length - 1];
         for (int i = 0; i < m_consonantf.length - 1; i++){
-            if (n > m_consonantf[i] && n <= m_consonantf[i+1])
-                return m_consonant[i+1];
+            if (n > m_consonantf[i] && n <= m_consonantf[i+1]) {
+                ret = m_consonant[i + 1];
+                int res = Math.min(m_consonantf[i+1] - m_consonantf[i], 100);
+                for (int j = i+1; j < m_consonantf.length; j++)
+                    m_consonantf[j] -= res;
+                m_constotalFreq -= res;
+                return ret;
+            }
+
         }
-        return m_consonant[m_vocal.length - 1];
+        return ret;
     }
 
     private void beginGame (){
