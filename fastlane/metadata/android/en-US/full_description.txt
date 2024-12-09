@@ -1,0 +1,6 @@
+There are three screens:
+* The menu screen, where you can choose language (with it's own statistical letter distribution) and timeout.
+* The numbers screen, where you can choose six numbers pushing units or decades and the goal is to get the closest possible to the target number using arithmetic operations.
+* The letters screen, where you can choose nine letters pushing vowel or consonant and the goal is to find the largest existing word using these letters.
+
+The game doesn't resolve any of the puzzles, it's just a random generator of numbers and letters.

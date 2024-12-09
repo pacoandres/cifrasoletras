@@ -109,7 +109,7 @@ public class Cifrasgame extends Gamescr{
     }
 
     private void beginGame (){
-        Integer timeout = MainActivity.getTimeout() * 60;
+        Integer timeout = BuildConfig.DEBUG ? 1000: MainActivity.getTimeout() * 60 ;
         m_timerText.setText(timeout.toString());
         m_bnext.setEnabled(false);
         m_timer = new CountDownTimer(timeout*1000, 1000) {

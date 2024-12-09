@@ -4,14 +4,14 @@ plugins {
 
 android {
     namespace = "org.gnu.itsmoroto.cifrasoletras"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "org.gnu.itsmoroto.cifrasoletras"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        targetSdk = 35
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,14 +22,21 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-
-    }
     tasks.withType<JavaCompile>(){
         options.compilerArgs.addAll(listOf("-nowarn", "-Xlint:deprecation"))
     }
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
 }
 
 dependencies {

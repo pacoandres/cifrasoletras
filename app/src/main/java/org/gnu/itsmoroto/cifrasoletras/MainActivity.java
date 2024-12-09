@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         initRandom();
         m_slocales = new HashMap<String, String>();
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         m_container = findViewById(R.id.container);
         m_mainview = new Main(this);
         m_games = new Gamescr[2];

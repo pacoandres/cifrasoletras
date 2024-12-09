@@ -1,0 +1,6 @@
+El juego contiene tres pantallas:
+* La pantalla de menú, donde se elige el idioma (que incluye la distribución estadística de letras correspondiente) el el tiempo límite.
+* La pantalla de cifras, en la que se eligen seis cifras al azar entre unidades o decenas, y que tiene el objetivo de aproximarse lo más posible al número objetivo mediante operaciones aritméticas.
+* La pantalla de letras, en la que se eligen nueve letras al azar entre consonantes y vocales, y que tiene el objetivo de construir la palabra existente más larga posible.
+
+El juego no resuelve ninguna de las pruebas, es simplemente un generador de cifras y letras al azar.

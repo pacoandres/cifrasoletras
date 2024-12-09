@@ -30,6 +30,7 @@ public abstract class Gamescr extends RelativeLayout {
     public abstract void resetGame ();
 
     protected void playEnd (){
-        ((MainActivity) getContext()).playAlarm();
+        if (!BuildConfig.DEBUG)
+            ((MainActivity) getContext()).playAlarm();
     }
 }
