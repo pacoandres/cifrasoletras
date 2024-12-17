@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 public abstract class Gamescr extends RelativeLayout {
 
+    protected MainActivity mActivity;
     public Gamescr(Context context) {
         super(context);
     }
@@ -26,6 +27,9 @@ public abstract class Gamescr extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    protected final void setMain (MainActivity activity){
+        mActivity = activity;
+    }
 
     public abstract void resetGame ();
 

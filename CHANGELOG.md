@@ -1,4 +1,16 @@
 # Changelog
+## v1.2.2
+* Improvements in language selection.
+* Exits app on back.
+
+## v1.2.1
+* Update gradle plugin for Android.
+* Changes in language selection.
+
+## v1.2.0
+* Change in versionCode numbering rules.
+* Change in some strings for Play Store compliant.
+
 ## v1.2
 * Change log added.
 * Update gradle version.

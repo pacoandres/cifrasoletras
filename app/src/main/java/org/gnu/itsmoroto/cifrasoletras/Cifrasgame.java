@@ -61,7 +61,7 @@ public class Cifrasgame extends Gamescr{
                     beginGame();
                 }
                 else{
-                    ((MainActivity) getContext()).nextGame();
+                    mActivity.nextGame();
                 }
             }
         });
@@ -109,18 +109,19 @@ public class Cifrasgame extends Gamescr{
     }
 
     private void beginGame (){
-        Integer timeout = BuildConfig.DEBUG ? 1000: MainActivity.getTimeout() * 60 ;
+        Integer timeout = BuildConfig.DEBUG ? 1: MainActivity.getTimeout() * 60 ;
         m_timerText.setText(timeout.toString());
         m_bnext.setEnabled(false);
         m_timer = new CountDownTimer(timeout*1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Integer timeout = (int) millisUntilFinished/1000;
+                Integer timeout = (int) millisUntilFinished/1000 + 1;
                 m_timerText.setText(timeout.toString());
             }
 
             @Override
             public void onFinish() {
+                m_timerText.setText("0");
                 playEnd ();
                 m_bnext.setText(R.string.next);
                 m_bnext.setEnabled(true);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cifras o letras</string>
+    <string name="app_name" translatable="false">Cifras o letras</string>
     <string name="orderseq">Orden secuencial</string>
     <string name="orderand">Orden aleatorio</string>
     <string name="timelimit">Tiempo</string>
