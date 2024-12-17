@@ -10,7 +10,7 @@
 package org.gnu.itsmoroto.cifrasoletras;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.activity.OnBackPressedCallback;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -21,13 +21,16 @@ import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.LocaleList;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -60,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private int ncurr;
     private MediaPlayer m_plyr;
+
+    private OnBackPressedCallback mCB = new OnBackPressedCallback (true){
+
+        @Override
+        public void handleOnBackPressed() {
+            System.exit(0);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
         m_container = findViewById(R.id.container);
         m_mainview = new Main(this);
         m_games = new Gamescr[2];
-        m_games[0] = new Cifrasgame(this);
-        m_games[1] = new Letrasgame(this);
+        /*m_games[0] = new Cifrasgame(this);
+        m_games[1] = new Letrasgame(this);*/
         m_selectedlocale = getResources().getConfiguration().getLocales().get(0);
         getLocales ();
         m_mainview.setLanguages(m_slocales);
         changeView(m_mainview);
         m_plyr = MediaPlayer.create(this, R.raw.final_alarm);
+
+        getOnBackPressedDispatcher().addCallback(this, mCB);
     }
 
     public void playAlarm (){
@@ -137,20 +151,53 @@ public class MainActivity extends AppCompatActivity {
         String lang = m_mainview.getLang();
         m_sequential = m_mainview.isOrderSeq();
         m_timeout = m_mainview.getTimeout();
+        setLocalteContext(lang);
+        createGameScreens();
         ncurr = getRandom(2);
         m_games[ncurr].resetGame();
         changeView(m_games[ncurr]);
-        Iterator<String> it = m_slocales.keySet().iterator();
-        while (it.hasNext()){
-            String k = it.next();
-            if (lang.equals(m_slocales.get(k))) {
-                m_selectedlocale = Locale.forLanguageTag(k);
-                break;
-            }
+
+    }
+    private Context getLocaleContext (){
+        Context ctx;
+        /*if (m_selectedlocale.equals(
+                getResources().getConfiguration().getLocales().get(0)) ) {
+            ctx = this;
         }
+        else {*/
+
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(m_selectedlocale);
+
+            ctx = getApplicationContext().createConfigurationContext(configuration);
+        /*}
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N){
+            getApplicationContext().createConfigurationContext(configuration);
+        } else {
+            resources.updateConfiguration(configuration,displayMetrics);
+        }*/
+        return ctx;
 
     }
 
+    private void createGameScreens (){
+        Context ctx = getLocaleContext();
+        m_games[0] = new Cifrasgame(ctx);
+        m_games[0].setMain(this);
+        m_games[1] = new Letrasgame(ctx);
+        m_games[1].setMain(this);
+    }
+
+    public Context setLocalteContext (String loc){
+        for (String k : m_slocales.keySet()) {
+            if (loc.equals(m_slocales.get(k))) {
+                m_selectedlocale = Locale.forLanguageTag(k);
+                return getLocaleContext();
+            }
+        }
+        return this;
+    }
     public void nextGame (){
         if (!m_sequential) {
             ncurr = getRandom(2);
@@ -174,20 +221,27 @@ class Main extends RelativeLayout {
     private RadioGroup m_orderGroup;
     private SeekBar m_timeBar;
     private TextView m_timeValue;
+    private TextView mtimeLabel;
     private Spinner m_languages;
     private ArrayAdapter<String> m_langadapter;
+    private Button mbeginButton;
+    private Context mCurrContext;
+    private MainActivity mMain;
     public Main (Context c){
         super (c);
         init();
     }
     private void init (){
         inflate(getContext(), R.layout.main, this);
+        mCurrContext = getContext();
+        mMain = (MainActivity) mCurrContext;
         m_sequential = findViewById(R.id.orderSeq);
         m_random = findViewById(R.id.orderRand);
         m_orderGroup = findViewById(R.id.orderGroup);
         m_orderGroup.check(m_random.getId());
         m_timeBar = findViewById(R.id.timelimitBar);
         m_timeValue = findViewById(R.id.timeValue);
+        mtimeLabel = findViewById(R.id.timelimitlabel);
         m_timeBar.setProgress(2);
         setTimeText(2);
         m_timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -212,7 +266,19 @@ class Main extends RelativeLayout {
                 //android.R.layout.simple_dropdown_item_1line);
         m_languages = findViewById(R.id.langcombo);
 
+        m_languages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                changeLanguage (i);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        mbeginButton = findViewById(R.id.startButton);
     }
 
 
@@ -250,5 +316,19 @@ class Main extends RelativeLayout {
     }
     public int getTimeout (){
         return (m_timeBar.getProgress() +1);
+    }
+
+    private void changeLanguage (int index){
+        String loc = (String) m_languages.getItemAtPosition(index);
+        mCurrContext = mMain.setLocalteContext(loc);
+        changeLabels ();
+    }
+
+    private void changeLabels (){
+        Resources r = mCurrContext.getResources();
+        m_sequential.setText(r.getString(R.string.orderseq));
+        m_random.setText(r.getString(R.string.orderand));
+        mtimeLabel.setText(r.getString(R.string.timelimit));
+        mbeginButton.setText(r.getString(R.string.begin));
     }
 }

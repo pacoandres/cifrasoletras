@@ -10,8 +10,9 @@ android {
         applicationId = "org.gnu.itsmoroto.cifrasoletras"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.2"
+        //Use 0 as . in version code.
+        versionCode = 10202
+        versionName = "1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
