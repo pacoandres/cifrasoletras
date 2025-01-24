@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 
 public abstract class Gamescr extends RelativeLayout {
 
-    protected MainActivity mActivity;
+    protected TheActivity mActivity;
     public Gamescr(Context context) {
         super(context);
     }
@@ -27,7 +27,7 @@ public abstract class Gamescr extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    protected final void setMain (MainActivity activity){
+    protected final void setMain (TheActivity activity){
         mActivity = activity;
     }
 
@@ -35,6 +35,6 @@ public abstract class Gamescr extends RelativeLayout {
 
     protected void playEnd (){
         if (!BuildConfig.DEBUG)
-            ((MainActivity) getContext()).playAlarm();
+            ((TheActivity) getContext()).playAlarm();
     }
 }

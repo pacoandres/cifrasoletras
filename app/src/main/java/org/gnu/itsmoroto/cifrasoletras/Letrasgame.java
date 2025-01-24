@@ -10,11 +10,6 @@
 package org.gnu.itsmoroto.cifrasoletras;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;

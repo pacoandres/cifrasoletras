@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:color="@color/disabledbutton" android:state_enabled="false"/>
+    <item android:drawable="@drawable/selectedbutton" android:state_focused="true" />
+    <item android:drawable="@drawable/defbutton" />
+    <item android:color="@color/selectedbuttonlight" android:state_focused="true" />
+    <item android:color="@color/defbutton" />-->
+    <item android:color="@color/white" android:state_focused="true"/>
+    <item android:color="@color/lb_grey" android:state_enabled="false"/>
+    <item android:color="@color/design_default_color_primary"/>
+</selector>

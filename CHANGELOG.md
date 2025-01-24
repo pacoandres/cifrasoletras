@@ -1,4 +1,9 @@
 # Changelog
+## v1.3.0
+* Added Android TV support.
+* Use of SoundPool instead of MediaPlayer.
+* Changed RelativeLayout to ConstraintLayout
+
 ## v1.2.2
 * Improvements in language selection.
 * Exits app on back.
