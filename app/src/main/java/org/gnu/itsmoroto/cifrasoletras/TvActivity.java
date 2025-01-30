@@ -11,11 +11,11 @@ package org.gnu.itsmoroto.cifrasoletras;
 
 import android.os.Bundle;
 
-public class MainActivity extends TheActivity {
+
+public class TvActivity extends TheActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 }
-
-

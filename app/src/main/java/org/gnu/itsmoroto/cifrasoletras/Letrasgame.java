@@ -10,11 +10,6 @@
 package org.gnu.itsmoroto.cifrasoletras;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
@@ -28,12 +23,11 @@ public class Letrasgame extends Gamescr {
     private static int[] m_vocalf;
 
 
-    private TextView m_timerText, m_letras;
-    private Button m_vocalb, m_consb, m_bnext;
-    private boolean m_finished;
+    private TextView m_letras;
+    private Button m_vocalb, m_consb;
     private int m_nletras;
     private final int m_total = 9;
-    private CountDownTimer m_timer;
+    private int mVocalSub, mConsSub;
     private int m_voctotalFreq = 10000, m_constotalFreq = 10000;
     public Letrasgame(Context context) {
         super(context);
@@ -68,35 +62,28 @@ public class Letrasgame extends Gamescr {
                 setLetra(letra);
             }
         });
-
-        m_bnext.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                if (!m_finished) {
-                    beginGame();
-                }
-                else {
-                    mActivity.nextGame();
-                }
-            }
-        });
-
+        setBtnNext();
         resetGame();
     }
 
+    @Override
+    protected void setLocaleContext (Context c){
+        super.setLocaleContext(c);
+        m_consb.setText(mLocaleContext.getResources().getString(R.string.consonant));
+        m_vocalb.setText(mLocaleContext.getResources().getString(R.string.vocal));
+        m_bnext.setText(mLocaleContext.getResources().getString(R.string.begin));
+        resetGame();
+    }
     private void getFrequecies (){
-        /*Configuration c1 = getResources().getConfiguration();
-        c1.setLocale(((MainActivity) getContext()).getSelectedLocale());
-        Context c = getContext().createConfigurationContext(c1);*/
-        Context c = getContext();
+        Context c = mLocaleContext;
         m_consonantf = c.getResources().getIntArray(R.array.conso_dist_freq);
         m_vocalf = c.getResources().getIntArray(R.array.voc_dist_freq);
         m_consonant = c.getResources().getStringArray(R.array.conso_dist);
         m_vocal = c.getResources().getStringArray(R.array.voc_dist);
         m_voctotalFreq = m_vocalf[m_vocalf.length -1];
         m_constotalFreq = m_consonantf[m_consonantf.length - 1];
-
+        mVocalSub = m_voctotalFreq/m_vocalf.length;
+        mConsSub = m_constotalFreq/m_consonantf.length;
     }
     private void setLetra (String letra){
         String letras = m_letras.getText().toString();
@@ -109,17 +96,19 @@ public class Letrasgame extends Gamescr {
             showBegin ();
     }
 
-    private void showBegin (){
+    @Override
+    protected void showBegin (){
         m_vocalb.setEnabled(false);
         m_consb.setEnabled(false);
-        m_bnext.setText(R.string.begin);
+        m_bnext.setText(mLocaleContext.getResources().getString (R.string.begin));
         m_bnext.setVisibility(VISIBLE);
     }
     @Override
     public void resetGame() {
+        int timeout = TheActivity.getTimeout() * 30;
+        m_timerText.setText(Integer.toString(timeout));
         m_finished = false;
         getFrequecies();
-        m_timerText.setText("");
         m_letras.setText("");
         m_bnext.setVisibility(INVISIBLE);
         m_vocalb.setEnabled(true);
@@ -128,15 +117,16 @@ public class Letrasgame extends Gamescr {
     }
 
     private String getVocal (){
-        int n = MainActivity.getRandom(m_voctotalFreq);
+        int n = TheActivity.getRandom(m_voctotalFreq);
         String ret = m_vocal[m_vocal.length - 1];
         for (int i = 0; i < m_vocalf.length - 1; i++){
             if (n > m_vocalf[i] && n <= m_vocalf[i+1]) {
                 ret = m_vocal[i + 1];
-                int res = Math.min(m_vocalf[i+1] - m_vocalf[i], 100);
+                int res = Math.min(m_vocalf[i+1] - m_vocalf[i], mVocalSub);
                 for (int j = i+1; j < m_vocalf.length; j++)
                     m_vocalf[j] -= res;
                 m_voctotalFreq -= res;
+                mVocalSub = m_voctotalFreq/m_vocalf.length;
                 return ret;
             }
         }
@@ -144,15 +134,16 @@ public class Letrasgame extends Gamescr {
     }
 
     private String getCons (){
-        int n = MainActivity.getRandom(m_constotalFreq);
+        int n = TheActivity.getRandom(m_constotalFreq);
         String ret = m_consonant[m_consonant.length - 1];
         for (int i = 0; i < m_consonantf.length - 1; i++){
             if (n > m_consonantf[i] && n <= m_consonantf[i+1]) {
                 ret = m_consonant[i + 1];
-                int res = Math.min(m_consonantf[i+1] - m_consonantf[i], 100);
+                int res = Math.min(m_consonantf[i+1] - m_consonantf[i], mConsSub);
                 for (int j = i+1; j < m_consonantf.length; j++)
                     m_consonantf[j] -= res;
                 m_constotalFreq -= res;
+                mConsSub = m_constotalFreq/m_consonantf.length;
                 return ret;
             }
 
@@ -160,27 +151,6 @@ public class Letrasgame extends Gamescr {
         return ret;
     }
 
-    private void beginGame (){
-        Integer timeout = BuildConfig.DEBUG ? 1: MainActivity.getTimeout() * 60 ;
-        m_timerText.setText(timeout.toString());
-        m_bnext.setEnabled(false);
-        m_timer = new CountDownTimer(timeout*1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                Integer timeout = (int) millisUntilFinished/1000 + 1;
-                m_timerText.setText(timeout.toString());
-            }
 
-            @Override
-            public void onFinish() {
-                m_timerText.setText("0");
-                playEnd ();
-                m_bnext.setText(R.string.next);
-                m_bnext.setEnabled(true);
-                m_finished = true;
-            }
-        };
-        m_timer.start();
-    }
 
 }

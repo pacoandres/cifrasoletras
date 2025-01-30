@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="defbuttonligh">#C0998EB4</color>
+    <color name="defbutton">#A0998EB4</color>
+    <color name="selectedbutton">#C0998EB4</color>
+    <color name="selectedbuttonlight">#FF998EB4</color>
+    <color name="disabledbutton">#80998EB4</color>
 </resources>

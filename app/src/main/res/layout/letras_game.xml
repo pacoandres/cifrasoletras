@@ -1,78 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical">
+    >
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/timerLetText"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/text34"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/letrasText"
+        app:layout_constraintVertical_chainStyle="spread"/>
 
-        <TextView
-            android:id="@+id/timerLetText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="34sp" />
 
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+    <TextView
+        android:id="@+id/letrasText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
+        android:paddingTop="10sp"
+        android:paddingRight="10sp"
+        android:paddingBottom="10sp"
+        android:text="TextView"
+        android:textSize="@dimen/text48"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timerLetText"
+        app:layout_constraintBottom_toTopOf="@+id/buttonVocal"/>
 
-        <TextView
-            android:id="@+id/letrasText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10sp"
-            android:paddingTop="10sp"
-            android:paddingRight="10sp"
-            android:paddingBottom="10sp"
-            android:text="TextView"
-            android:textSize="48sp"
-            android:textStyle="bold" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+    <Button
+        android:id="@+id/buttonVocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vocal"
+        android:textColor="@color/buttontxt"
+        android:textSize="@dimen/text24"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLetNext"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/letrasText" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonVocal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/vocal"
-                android:textSize="24sp" />
+    <Button
+        android:id="@+id/buttonCons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consonant"
+        android:textColor="@color/buttontxt"
+        android:textSize="@dimen/text24"
+        app:layout_constraintTop_toTopOf="@+id/buttonVocal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonVocal"/>
 
-            <Space
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/buttonCons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/consonant"
-                android:textSize="24sp" />
-        </LinearLayout>
+    <Button
+        android:id="@+id/buttonLetNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:textColor="@color/buttontxt"
+        android:textSize="@dimen/text24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVocal"/>
 
-        <Button
-            android:id="@+id/buttonLetNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:textSize="24sp" />
-    </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
