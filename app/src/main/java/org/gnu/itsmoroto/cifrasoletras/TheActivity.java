@@ -14,8 +14,8 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.AudioAttributes;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -26,6 +26,8 @@ import java.util.Random;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 
 public class TheActivity extends AppCompatActivity {
     private FrameLayout m_container;
@@ -35,6 +37,7 @@ public class TheActivity extends AppCompatActivity {
     private boolean m_sequential = false;
     private static Random m_generator = null;
     private static int m_timeout;
+    private int mstreamID;
     HashMap<String, String> m_slocales;
 
     private Locale m_selectedlocale;
@@ -48,6 +51,7 @@ public class TheActivity extends AppCompatActivity {
 
         @Override
         public void handleOnBackPressed() {
+            m_plyr.release();
             System.exit(0);
         }
     };
@@ -75,7 +79,7 @@ public class TheActivity extends AppCompatActivity {
                 .Builder()
                 .setUsage(
                         AudioAttributes
-                                .USAGE_ASSISTANCE_SONIFICATION)
+                                .USAGE_GAME)
                 .setContentType(
                         AudioAttributes
                                 .CONTENT_TYPE_SONIFICATION)
@@ -93,7 +97,10 @@ public class TheActivity extends AppCompatActivity {
     }
 
     public void playAlarm (){
-        m_plyr.play(m_finalsnd, 1, 1, 0, 0, 1);
+        mstreamID = m_plyr.play(m_finalsnd, 1, 1, 0, 0, 1);
+    }
+    public void stopAlarm (){
+        m_plyr.stop(mstreamID);
     }
     private void getLocales (){
         //Resources r = getResources();
@@ -150,45 +157,54 @@ public class TheActivity extends AppCompatActivity {
         String lang = m_mainview.getLang();
         m_sequential = m_mainview.isOrderSeq();
         m_timeout = m_mainview.getTimeout();
-        setLocalteContext(lang);
+        setLocaleContext(lang);
         createGameScreens();
         ncurr = getRandom(2);
         m_games[ncurr].resetGame();
         changeView(m_games[ncurr]);
 
     }
+
+    @SuppressWarnings("deprecation")
     private Context getLocaleContext (){
-        Context ctx;
-        /*if (m_selectedlocale.equals(
-                getResources().getConfiguration().getLocales().get(0)) ) {
-            ctx = this;
-        }
-        else {*/
+
 
         Resources resources = getResources();
         Configuration configuration = resources.getConfiguration();
         configuration.setLocale(m_selectedlocale);
+        //Deprecated
+        /*getBaseContext().getResources().updateConfiguration(configuration,
+                getBaseContext().getResources().getDisplayMetrics());*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            AppCompatDelegate.setApplicationLocales(
+                    LocaleListCompat.create(new Locale[] {m_selectedlocale})
+            );
+            return this;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return getBaseContext().createConfigurationContext(configuration);
 
-        ctx = getApplicationContext().createConfigurationContext(configuration);
-        /*}
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N){
-            getApplicationContext().createConfigurationContext(configuration);
         } else {
-            resources.updateConfiguration(configuration,displayMetrics);
-        }*/
-        return ctx;
-
+            getBaseContext().getResources().updateConfiguration(
+                    configuration, getBaseContext().getResources().getDisplayMetrics());
+            return this;
+        }
+        /*attachBaseContext(new ContextWrapper(
+                createConfigurationContext(configuration)
+        ));*/
     }
 
     private void createGameScreens (){
         Context ctx = getLocaleContext();
-        m_games[0] = new Cifrasgame(ctx);
+        m_games[0] = new Cifrasgame(this);
+        m_games[0].setLocaleContext(ctx);
         m_games[0].setMain(this);
-        m_games[1] = new Letrasgame(ctx);
+        m_games[1] = new Letrasgame(this);
+        m_games[1].setLocaleContext(ctx);
         m_games[1].setMain(this);
     }
 
-    public Context setLocalteContext (String loc){
+    public Context setLocaleContext(String loc){
         for (String k : m_slocales.keySet()) {
             if (loc.equals(m_slocales.get(k))) {
                 m_selectedlocale = Locale.forLanguageTag(k);

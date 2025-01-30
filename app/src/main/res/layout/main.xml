@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#00FFFFFF"
-    android:gravity="center_horizontal|center_vertical">
+    >
 
 
     <RadioGroup
         android:id="@+id/orderGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
         android:background="@drawable/border"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/timeValue"
@@ -30,7 +29,7 @@
             android:paddingRight="10sp"
             android:paddingBottom="10sp"
             android:text="@string/orderseq"
-            android:textSize="24sp" />
+            android:textSize="@dimen/text24" />
 
         <RadioButton
             android:id="@+id/orderRand"
@@ -41,7 +40,7 @@
             android:paddingRight="10sp"
             android:paddingBottom="10sp"
             android:text="@string/orderand"
-            android:textSize="24sp" />
+            android:textSize="@dimen/text24" />
 
     </RadioGroup>
 
@@ -55,7 +54,7 @@
         android:paddingRight="10sp"
         android:paddingBottom="10sp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="@dimen/text18"
         app:layout_constraintBottom_toTopOf="@+id/timelimitBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,10 +63,10 @@
     <SeekBar
         android:id="@+id/timelimitBar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:indeterminate="false"
-        android:max="4"
+        android:max="8"
         android:progress="1"
         app:layout_constraintBottom_toTopOf="@+id/timelimitlabel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +83,7 @@
         android:paddingRight="10sp"
         android:paddingBottom="10sp"
         android:text="@string/timelimit"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
         app:layout_constraintBottom_toTopOf="@+id/langcombo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +93,7 @@
         android:id="@+id/langcombo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text24"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +112,7 @@
         android:paddingBottom="10sp"
         android:text="@string/begin"
         android:textColor="@color/buttontxt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

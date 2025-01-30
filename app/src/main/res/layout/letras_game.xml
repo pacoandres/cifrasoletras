@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical">
+    >
 
 
     <TextView
@@ -13,11 +13,13 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="34sp"
+        android:textSize="@dimen/text34"
+        android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/letrasText"/>
+        app:layout_constraintBottom_toTopOf="@+id/letrasText"
+        app:layout_constraintVertical_chainStyle="spread"/>
 
 
 
@@ -30,7 +32,7 @@
         android:paddingRight="10sp"
         android:paddingBottom="10sp"
         android:text="TextView"
-        android:textSize="48sp"
+        android:textSize="@dimen/text48"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/vocal"
         android:textColor="@color/buttontxt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
         android:layout_marginEnd="25dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLetNext"
         app:layout_constraintEnd_toStartOf="@+id/buttonCons"
@@ -58,10 +60,9 @@
         android:layout_height="wrap_content"
         android:text="@string/consonant"
         android:textColor="@color/buttontxt"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLetNext"
+        android:textSize="@dimen/text24"
+        app:layout_constraintTop_toTopOf="@+id/buttonVocal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letrasText"
         app:layout_constraintStart_toEndOf="@+id/buttonVocal"/>
 
 
@@ -71,7 +72,7 @@
         android:layout_height="wrap_content"
         android:text="@string/next"
         android:textColor="@color/buttontxt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

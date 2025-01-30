@@ -3,36 +3,36 @@
     <integer-array
         name="conso_dist_freq">
         <item>0</item>
-        <item>30</item>
-        <item>64</item>
-        <item>107</item>
-        <item>177</item>
-        <item>322</item>
-        <item>476</item>
-        <item>635</item>
-        <item>858</item>
-        <item>1113</item>
-        <item>1432</item>
-        <item>1798</item>
-        <item>2228</item>
-        <item>2674</item>
-        <item>3152</item>
-        <item>3757</item>
-        <item>4394</item>
-        <item>5238</item>
-        <item>6305</item>
-        <item>7452</item>
-        <item>8614</item>
-        <item>10000</item>
+        <item>2547</item>
+        <item>5674</item>
+        <item>9637</item>
+        <item>15562</item>
+        <item>27340</item>
+        <item>40953</item>
+        <item>55126</item>
+        <item>71545</item>
+        <item>94849</item>
+        <item>121345</item>
+        <item>154947</item>
+        <item>189947</item>
+        <item>225850</item>
+        <item>264095</item>
+        <item>307439</item>
+        <item>359644</item>
+        <item>423547</item>
+        <item>501044</item>
+        <item>584587</item>
+        <item>670984</item>
+        <item>758828</item>
     </integer-array>
 
     <integer-array name="voc_dist_freq">
         <item>0</item>
-        <item>2120</item>
-        <item>5109</item>
-        <item>7446</item>
-        <item>9103</item>
-        <item>10000</item>
+        <item>43759</item>
+        <item>118005</item>
+        <item>212122</item>
+        <item>306568</item>
+        <item>419865</item>
 
     </integer-array>
 
@@ -49,25 +49,25 @@
         <item>Y</item>
         <item>B</item>
         <item>H</item>
-        <item>M</item>
-        <item>P</item>
         <item>G</item>
+        <item>P</item>
+        <item>M</item>
         <item>D</item>
         <item>C</item>
         <item>L</item>
         <item>T</item>
         <item>N</item>
-        <item>R</item>
         <item>S</item>
+        <item>R</item>
     </string-array>
 
     <string-array name="voc_dist">
         <item></item>
+        <item>U</item>
+        <item>O</item>
+        <item>I</item>
         <item>A</item>
         <item>E</item>
-        <item>I</item>
-        <item>O</item>
-        <item>U</item>
     </string-array>
     
 </resources>

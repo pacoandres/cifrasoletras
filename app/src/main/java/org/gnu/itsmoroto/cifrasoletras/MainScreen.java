@@ -96,7 +96,7 @@ class MainScreen extends RelativeLayout {
 
     private void setTimeText (int progress){
         int val = (progress * (m_timeBar.getWidth() - 2 * m_timeBar.getThumbOffset())) / m_timeBar.getMax();
-        m_timeValue.setText("" + (progress+1) + " min");
+        m_timeValue.setText("" + (progress+1)*30 + " sec.");
         m_timeValue.setX(m_timeBar.getX() + val + m_timeBar.getThumbOffset() / 2);
         //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
     }
@@ -132,7 +132,7 @@ class MainScreen extends RelativeLayout {
 
     private void changeLanguage (int index){
         String loc = (String) m_languages.getItemAtPosition(index);
-        mCurrContext = mMain.setLocalteContext(loc);
+        mCurrContext = mMain.setLocaleContext(loc);
         changeLabels ();
     }
 

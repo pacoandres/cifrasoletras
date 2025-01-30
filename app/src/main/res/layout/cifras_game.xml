@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal|center_vertical">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -14,11 +13,13 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="34sp"
+        android:textSize="@dimen/text34"
+        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toTopOf="@+id/resulText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
         />
 
 
@@ -32,7 +33,7 @@
         android:paddingBottom="10sp"
         android:text="TextView"
         android:textColor="@android:color/holo_green_dark"
-        android:textSize="48sp"
+        android:textSize="@dimen/text48"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +50,7 @@
         android:paddingRight="10sp"
         android:paddingBottom="10sp"
         android:text="TextView"
-        android:textSize="48sp"
+        android:textSize="@dimen/text48"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resulText"
@@ -59,12 +60,12 @@
 
     <Button
         android:id="@+id/buttonUnidad"
-        style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/unit"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
         android:layout_marginEnd="25dp"
+        android:textColor="@color/buttontxt"
         app:layout_constraintBottom_toTopOf="@+id/buttonCifNext"
         app:layout_constraintEnd_toStartOf="@+id/buttonDecena"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,11 +78,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/decade"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
+        android:textColor="@color/buttontxt"
         app:layout_constraintStart_toEndOf="@+id/buttonUnidad"
-        app:layout_constraintTop_toBottomOf="@+id/cifrasText"
+        app:layout_constraintTop_toTopOf="@+id/buttonUnidad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCifNext"/>
+        />
 
 
     <Button
@@ -89,7 +91,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
-        android:textSize="24sp"
+        android:textSize="@dimen/text24"
+        android:textColor="@color/buttontxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

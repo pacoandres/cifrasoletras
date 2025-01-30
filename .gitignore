@@ -42,3 +42,4 @@ gradle/
 
 /app/release/*
 /app/debug/*
+/letter_frequencies/*

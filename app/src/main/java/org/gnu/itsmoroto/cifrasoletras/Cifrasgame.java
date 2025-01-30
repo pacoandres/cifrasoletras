@@ -24,14 +24,13 @@ public class Cifrasgame extends Gamescr{
         init ();
     }
 
-    private Button m_bunit, m_bdecade, m_bnext;
+    private Button m_bunit, m_bdecade;
     private final Integer [] m_decades = {10, 25, 50, 75, 100};
 
-    private TextView m_cifrasText, m_resulText, m_timerText;
+    private TextView m_cifrasText, m_resulText;
     private int m_ncifras;
 
     private CountDownTimer m_timer;
-    private boolean m_finished;
     private final int m_total = 6;
     private void  init (){
         inflate(getContext(), R.layout.cifras_game, this);
@@ -54,38 +53,35 @@ public class Cifrasgame extends Gamescr{
                 onDecena();
             }
         });
-        m_bnext.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                if (!m_finished) {
-                    beginGame();
-                }
-                else{
-                    mActivity.nextGame();
-                }
-            }
-        });
+        setBtnNext();
         resetGame();
     }
     @Override
     public void resetGame() {
+        int timeout = TheActivity.getTimeout() * 30;
+        m_timerText.setText(Integer.toString(timeout));
         m_cifrasText.setText("");
         m_resulText.setText("");
-        m_timerText.setText("");
         m_bnext.setVisibility(INVISIBLE);
         m_bunit.setEnabled(true);
         m_bdecade.setEnabled(true);
         m_ncifras = 0;
         m_finished = false;
     }
-
+    protected void setLocaleContext (Context c){
+        super.setLocaleContext(c);
+        m_bunit.setText(mLocaleContext.getResources().getString(R.string.unit));
+        m_bdecade.setText(mLocaleContext.getResources().getString(R.string.decade));
+        m_bnext.setText(mLocaleContext.getResources().getString(R.string.begin));
+        resetGame();
+    }
     public void onUnidad (){
-        Integer val = MainActivity.getRandom (9);
+        Integer val = TheActivity.getRandom (9);
         setCifras(val+1);
     }
 
     public void onDecena (){
-        Integer val = m_decades[MainActivity.getRandom (4)];
+        Integer val = m_decades[TheActivity.getRandom (4)];
         setCifras(val);
     }
     private void setCifras (Integer val){
@@ -99,37 +95,16 @@ public class Cifrasgame extends Gamescr{
             showBegin ();
     }
 
-    private void showBegin (){
+    @Override
+    protected void showBegin (){
 
         m_bnext.setVisibility(VISIBLE);
         m_bnext.setText(R.string.begin);
         m_bunit.setEnabled(false);
         m_bdecade.setEnabled(false);
-        m_resulText.setText(MainActivity.getRandom(1000).toString());
+        m_resulText.setText(TheActivity.getRandom(1000).toString());
     }
 
-    private void beginGame (){
-        Integer timeout = BuildConfig.DEBUG ? 1: MainActivity.getTimeout() * 60 ;
-        m_timerText.setText(timeout.toString());
-        m_bnext.setEnabled(false);
-        m_timer = new CountDownTimer(timeout*1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                Integer timeout = (int) millisUntilFinished/1000 + 1;
-                m_timerText.setText(timeout.toString());
-            }
-
-            @Override
-            public void onFinish() {
-                m_timerText.setText("0");
-                playEnd ();
-                m_bnext.setText(R.string.next);
-                m_bnext.setEnabled(true);
-                m_finished = true;
-            }
-        };
-        m_timer.start();
-    }
 
 
 }
